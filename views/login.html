@@ -1,0 +1,97 @@
+<div class="container" ng-controller="UserCtrl">
+
+    <div ng-show="isAuthenticated" class="widget-login-container" >
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
+                <section class="widget widget-login animated fadeInUp">
+                    <div>{{message}}</div>
+                    <br>
+                    <a ng-click="logout()" href="">Выход</a>
+                </section>
+            </div>
+        </div>
+    </div>
+
+     <main ng-show="!isAuthenticated"  id="content" class="widget-login-container" role="main">
+        <div class="row"  ng-show="!moreText" >
+            <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
+                <h4 class="widget-login-logo animated fadeInUp">
+                    <i class="fa fa-circle text-gray"></i>
+                    EpiDog.Net
+                    <i class="fa fa-circle text-warning"></i>
+                </h4>
+                <section class="widget widget-login animated fadeInUp">
+                    <header>
+                        <h3>Вход </h3>
+                    </header>
+                    <div class="widget-body">
+                        <form class="login-form mt-lg" ng-submit="submit(credentials)">
+                            <div class="form-group">
+                                <input type="text" class="form-control"
+                                       id="username" placeholder="Username"
+                                       ng-model="credentials.username">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control"
+                                       id="password" type="text" placeholder="Password"
+                                       ng-model="credentials.password">
+                            </div>
+                            <div class="clearfix">
+                                <div class="btn-toolbar pull-right">
+                                    <button type="button" data-ui-sref="app.page({ page: 'register', child: null })" class="btn btn-default btn-sm">Create an Account</button>
+                                    <button type="submit" class="btn btn-inverse btn-sm">Login</button>
+                                    <div>{{error}}</div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-push-6">
+                                    <div class="clearfix">
+                                        <div class="checkbox widget-login-info pull-right ml-n-lg">
+                                            <input type="checkbox" id="checkbox1" value="1">
+                                            <label for="checkbox1">Keep me signed in </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-sm-pull-6">
+                                    <a class="mr-n-lg" ng-click="more(1)" >Подробнее об этом проекте</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div ng-show="moreText" class="row">
+        <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
+            <h4 class="widget-login-logo animated fadeInUp">
+                <i class="fa fa-circle text-gray"></i>
+                EpiDog.Net
+                <i class="fa fa-circle text-warning"></i>
+            </h4>
+            <section class="widget widget-login animated fadeInUp">
+                <p>Этат сайт/программа разработан для организации и учета процесса лечения собак, больных
+                    <a href="https://ru.wikipedia.org/wiki/%D0%AD%D0%BF%D0%B8%D0%BB%D0%B5%D0%BF%D1%81%D0%B8%D1%8F">эпилепсией</a>.
+                </p>
+                <p>Лечение эпилепсии ставит много задач перед владельцами собак. Заболевание в большинстве случаев
+                    пожизненное, а медикоменты зачастую нужно принимать ежедневно. Необходимо вести учет большого
+                    количества жизненных параметров собаки и многое другое. Для решения некоторых проблем, связвнных со
+                    сбором, хранением и анализом различной информации и создана эта программа.
+                </p>
+                <p> Огромное влияние на идею создания этой программы оказал форум epidog.info<br>
+                 Данная программа создается при активном участии и поддержке людей которые своим бесценным опытом наполняют этот форум.</p>
+                <div>
+                    <a class="mr-n-lg" ng-click="more(0)" >Закрыть</a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <footer class="page-footer">
+        2015 &copy; EpiDog.Net
+    </footer>
+</div>

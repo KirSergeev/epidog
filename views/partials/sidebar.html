@@ -1,0 +1,85 @@
+<!-- need this .js class to initiate slimscroll -->
+<div class="js-sidebar-content">
+    <header class="logo hidden-xs">
+        <a href="index.html">{{app.name}}</a>
+    </header>
+    <!-- seems like lots of recent admin template have this feature of user info in the sidebar.
+         looks good, so adding it and enhancing with notifications -->
+    <div class="sidebar-status visible-xs">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="thumb-sm avatar pull-right">
+                    <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
+                </span>
+            Philip <strong>Smith</strong>
+        </a>
+        <!-- #notifications-dropdown-menu goes here when screen collapsed to xs or sm -->
+    </div>
+    <!-- main notification links are placed inside of .sidebar-nav -->
+    <ul class="sidebar-nav">
+        <li>
+            <!-- an example of nested submenu. basic bootstrap collapse component -->
+            <a class="collapsed" data-target="#sidebar-dashboard" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="fa fa-desktop"></i>
+                    </span>
+                Dashboard
+                <i class="toggle fa fa-angle-down"></i>
+            </a>
+            <ul id="sidebar-dashboard" class="collapse">
+                <li><a data-ui-sref="app.page({ page: 'about', child: null })">О проекте</a></li>
+            </ul>
+        </li>
+        <li>
+            <a data-ui-sref="app.page({ page: 'charts', child: null })">
+                    <span class="icon">
+                        <i class="glyphicon glyphicon-stats"></i>
+                    </span>
+                Charts
+            </a>
+        </li>
+    </ul>
+    <!-- every .sidebar-nav may have a title -->
+    <h5 class="sidebar-nav-title">Template <a class="action-link" href="#"><i class="glyphicon glyphicon-refresh"></i></a></h5>
+    <ul class="sidebar-nav">
+
+        <li>
+            <!-- an example of nested submenu. basic bootstrap collapse component -->
+            <a class="collapsed" data-target="#sidebar-tables" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="fa fa-table"></i>
+                    </span>
+                Отчеты
+                <i class="toggle fa fa-angle-down"></i>
+            </a>
+            <ul id="sidebar-tables" class="collapse">
+                <li><a data-ui-sref="app.page({ page: 'tables', child: 'basic' })">Tables Basic</a></li>
+                <li><a data-ui-sref="app.page({ page: 'tables', child: 'dynamic' })">Tables Dynamic <sup class="bg-transparent text-danger fs-sm fw-bold">ng</sup></a></li>
+            </ul>
+        </li>
+
+
+        <li>
+            <a class="collapsed" data-target="#sidebar-levels" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="fa fa-folder-open"></i>
+                    </span>
+                Информация
+                <i class="toggle fa fa-angle-down"></i>
+            </a>
+            <ul id="sidebar-levels" class="collapse">
+                <li>
+                    <a class="collapsed" data-target="#sidebar-sub-levels" data-toggle="collapse" data-parent="#sidebar-levels">
+                        Различные статьи на тему эпилепсии у собак
+                        <i class="toggle fa fa-angle-down"></i>
+                    </a>
+                    <ul id="sidebar-sub-levels" class="collapse">
+                        <li><a href>Level 3</a></li>
+                        <li><a href>Level 3</a></li>
+                    </ul>
+                </li>
+                <li><a href>Level 1</a></li>
+            </ul>
+        </li>
+    </ul>
+
+</div>
