@@ -244,7 +244,8 @@ Helpers.prototype = {
 
 app.helpers = new Helpers();
 
-appControllers.controller('SingAppController', ['$scope', '$localStorage',function ($scope, $localStorage, $window){
+appControllers.controller('SingAppController', ['$scope', '$localStorage', '$location', '$window', 'auth',
+                                      function ($scope,    $localStorage,   $location,   $window,   auth){
     $scope.app = app;
     if (angular.isDefined($localStorage.state)){
         $scope.app.state = $localStorage.state;
@@ -258,17 +259,30 @@ appControllers.controller('SingAppController', ['$scope', '$localStorage',functi
 
     $scope.logoff = function () {
 
-        document.localStorage.setItem("profile", '');
-        //$window.sessionStorage.setItem("profile", '');
-        document.location.href='./';
+        auth.logout();
+        $location.path('/login');
 
     };
+    var currentUser = auth.getProfile();
+    if(currentUser) {
+        $scope.prfileName = currentUser.memberNik;
+    }
 
     $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+
+        if(!auth.check()) {
+            auth.logout();
+            $location.path('/login');
+        }
         $scope.loginPage = toState.name == 'login';
         $scope.errorPage = toState.name == 'error';
         $(document).trigger('sn:loaded', [event, toState, toParams, fromState, fromParams]);
-    })
+    });
+
+    $scope.$on("$routeChangeError", function () {
+        auth.logout();
+        $location.path('/login');
+    });
 }]);
 
 appControllers.controller('UserCtrl', function ($scope, $http, $window, $location, $timeout, $log, auth) {
@@ -312,6 +326,5 @@ appControllers.controller('UserCtrl', function ($scope, $http, $window, $locatio
             });
 
     };
-
 
 });
