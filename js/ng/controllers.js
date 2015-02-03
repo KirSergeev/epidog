@@ -263,10 +263,7 @@ appControllers.controller('SingAppController', ['$scope', '$localStorage', '$loc
         $location.path('/login');
 
     };
-    var currentUser = auth.getProfile();
-    if(currentUser) {
-        $scope.prfileName = currentUser.memberNik;
-    }
+
 
     $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
 
@@ -274,15 +271,17 @@ appControllers.controller('SingAppController', ['$scope', '$localStorage', '$loc
             auth.logout();
             $location.path('/login');
         }
+        else{
+            var currentUser = auth.getProfile();
+            if( currentUser ) {
+                $scope.prfileName = currentUser.memberNik || 'Unknown';
+            }
+        }
         $scope.loginPage = toState.name == 'login';
         $scope.errorPage = toState.name == 'error';
         $(document).trigger('sn:loaded', [event, toState, toParams, fromState, fromParams]);
     });
 
-    $scope.$on("$routeChangeError", function () {
-        auth.logout();
-        $location.path('/login');
-    });
 }]);
 
 appControllers.controller('UserCtrl', function ($scope, $http, $window, $location, $timeout, $log, auth) {
@@ -302,9 +301,8 @@ appControllers.controller('UserCtrl', function ($scope, $http, $window, $locatio
     };
 
     // Check on console profile
-    //console.log(auth.logout());
-    console.log(auth.check());
-    console.log(auth.getProfile());
+    //console.log(auth.check());
+    //console.log(auth.getProfile());
 
     // You don't need more
     // $scope.isAuthenticated;
