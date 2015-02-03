@@ -244,7 +244,8 @@ Helpers.prototype = {
 
 app.helpers = new Helpers();
 
-appControllers.controller('SingAppController', ['$scope', '$localStorage',function ($scope, $localStorage, $window){
+appControllers.controller('SingAppController', ['$scope', '$localStorage','$window'
+                                      ,function ($scope,   $localStorage,  $window) {
     $scope.app = app;
     if (angular.isDefined($localStorage.state)){
         $scope.app.state = $localStorage.state;
@@ -258,8 +259,7 @@ appControllers.controller('SingAppController', ['$scope', '$localStorage',functi
 
     $scope.logoff = function () {
 
-        document.localStorage.setItem("profile", '');
-        //$window.sessionStorage.setItem("profile", '');
+        $window.localStorage.setItem("profile", '');
         document.location.href='./';
 
     };
@@ -271,7 +271,7 @@ appControllers.controller('SingAppController', ['$scope', '$localStorage',functi
     })
 }]);
 
-appControllers.controller('UserCtrl', function ($scope, $http, $window, $location) {
+appControllers.controller('UserCtrl', function ($scope, $http, $window, $location, $timeout) {
     $scope.isAuthenticated = false;
     $scope.moreText = false;
     $scope.welcome = '';
@@ -296,10 +296,7 @@ appControllers.controller('UserCtrl', function ($scope, $http, $window, $locatio
                 $scope.isAuthenticated = true;
                 $scope.message = 'Welcome ' + data.memberNik;
 
-                //window.setTimeout( function () { $location.path('/app/about') }, 3000);
-                window.setTimeout( function () { document.location.href='./'; }, 3000);
-                // window.setTimeout( function () { $location.path('./'); }, 3000);
-                //ar obj = JSON.parse(json_str);
+                $timeout(function(){ $location.path('/app/about'); }, 3000);
 
             })
             .error(function (data, status, headers, config) {
