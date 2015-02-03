@@ -290,7 +290,7 @@ appControllers.controller('UserCtrl', function ($scope, $http, $window, $locatio
 
     $scope.submit = function ( credentials ) {
         $http
-            .post('./server/?authenticate', credentials )
+            .post('http://epidog.net/server/?authenticate', credentials )
             .success(function (data, status, headers, config) {
                 $window.localStorage.setItem("profile", JSON.stringify(data));
                 $scope.isAuthenticated = true;

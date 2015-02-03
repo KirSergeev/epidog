@@ -31,6 +31,7 @@ singApp.config(function($stateProvider, $urlRouterProvider){
     //$urlRouterProvider.otherwise("/app/dashboard");
     $urlRouterProvider.otherwise("/app/about");
 
+
     $stateProvider
         .state('app', {
             abstract: true,
