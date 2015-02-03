@@ -314,7 +314,7 @@ appControllers.controller('UserCtrl', function ($scope, $http, $window, $locatio
             .success(function(){
                 $scope.isAuthenticated = true;
                 $scope.message = 'Welcome ' + auth.getProfile().memberNik;
-                $timeout(function(){ $location.path('/app/about'); }, 2500);
+                $timeout(function(){ $location.path('/app/about'); }, 1500);
 
             })
             .error(function(){
