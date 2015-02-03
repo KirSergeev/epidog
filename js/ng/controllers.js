@@ -1,6 +1,6 @@
 'use strict';
 
-var appControllers = angular.module('app.controllers', []);
+var appControllers = angular.module('app.controllers', ['app.services']);
 
 //settings and state
 var app = {
@@ -244,8 +244,7 @@ Helpers.prototype = {
 
 app.helpers = new Helpers();
 
-appControllers.controller('SingAppController', ['$scope', '$localStorage','$window'
-                                      ,function ($scope,   $localStorage,  $window) {
+appControllers.controller('SingAppController', ['$scope', '$localStorage',function ($scope, $localStorage, $window){
     $scope.app = app;
     if (angular.isDefined($localStorage.state)){
         $scope.app.state = $localStorage.state;
@@ -259,7 +258,8 @@ appControllers.controller('SingAppController', ['$scope', '$localStorage','$wind
 
     $scope.logoff = function () {
 
-        $window.localStorage.setItem("profile", '');
+        document.localStorage.setItem("profile", '');
+        //$window.sessionStorage.setItem("profile", '');
         document.location.href='./';
 
     };
@@ -271,7 +271,7 @@ appControllers.controller('SingAppController', ['$scope', '$localStorage','$wind
     })
 }]);
 
-appControllers.controller('UserCtrl', function ($scope, $http, $window, $location, $timeout) {
+appControllers.controller('UserCtrl', function ($scope, $http, $window, $location, $timeout, $log, auth) {
     $scope.isAuthenticated = false;
     $scope.moreText = false;
     $scope.welcome = '';
@@ -287,29 +287,31 @@ appControllers.controller('UserCtrl', function ($scope, $http, $window, $locatio
 
     };
 
+    // Check on console profile
+    //console.log(auth.logout());
+    console.log(auth.check());
+    console.log(auth.getProfile());
+
+    // You don't need more
+    // $scope.isAuthenticated;
+    // Get: auth.check() - Show is user auth or not
 
     $scope.submit = function ( credentials ) {
-        $http
-            .post('http://epidog.net/server/?authenticate', credentials )
-            .success(function (data, status, headers, config) {
-                $window.localStorage.setItem("profile", JSON.stringify(data));
-                $scope.isAuthenticated = true;
-                $scope.message = 'Welcome ' + data.memberNik;
 
-                $timeout(function(){ $location.path('/app/about'); }, 3000);
+        auth.login(credentials)
+            .success(function(){
+                $scope.isAuthenticated = true;
+                $scope.message = 'Welcome ' + auth.getProfile().memberNik;
+                $timeout(function(){ $location.path('/app/about'); }, 2500);
 
             })
-            .error(function (data, status, headers, config) {
-                // Erase the token if the user fails to log in
-                delete $window.sessionStorage.token;
-                $scope.isAuthenticated = false;
-
-                // Handle login errors here
+            .error(function(){
                 $scope.error = 'Error: Invalid user or password';
                 $scope.welcome = '';
-            });
-    };
 
+            });
+
+    };
 
 
 });

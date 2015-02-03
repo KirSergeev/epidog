@@ -3,7 +3,7 @@
 /* Services */
 
 // Define your services here if necessary
-var appServices = angular.module('app.services', []);
+var appServices = angular.module('app.services', ['ngStorage']);
 
 /**
  * Override default angular exception handler to log and alert info if debug mode
@@ -91,3 +91,93 @@ appServices.factory('scriptLoader', ['$q', '$timeout', function($q, $timeout) {
         }
     }
 }]);
+
+// Use $localStorage or $sessionStorage up to you
+appServices.factory('auth', ['$log', '$localStorage', '$http', function($log, $storage, $http){
+
+    $storage.$default({
+        profile: null
+    });
+
+    return {
+        check: check,
+        login: login,
+        logout: logout,
+        getProfile: getProfile
+    };
+
+    // Get user info
+    function getProfile(){
+        return $storage.profile || null;
+    }
+
+    // Check is user authorize
+    function check(){
+        return $storage.profile !== null;
+    }
+
+    // Logout user
+    function logout(){
+        $storage.$reset({
+            profile: null
+        });
+    }
+
+    // Login user
+    function login(credentials){
+
+        return $http
+            .post('http://epidog.net/server/?authenticate', credentials )
+            .success(function (data) {
+                $storage.profile = data;
+            });
+
+    }
+
+}]);
+
+
+// Use $localStorage or $sessionStorage up to you
+appServices.factory('auth', ['$log', '$localStorage', '$http', function($log, $storage, $http) {
+
+    $storage.$default({
+        profile: null
+    });
+
+    return {
+        check: check,
+        login: login,
+        logout: logout,
+        getProfile: getProfile
+    };
+
+    // Get user info
+    function getProfile(){
+        return $storage.profile || null;
+    }
+
+    // Check is user authorize
+    function check(){
+        return $storage.profile !== null;
+    }
+
+    // Logout user
+    function logout(){
+        $storage.$reset({
+            profile: null
+        });
+    }
+
+    // Login user
+    function login(credentials){
+
+        return $http
+            .post('http://epidog.net/server/?authenticate', credentials )
+            .success(function (data) {
+                $storage.profile = data;
+            });
+
+    }
+
+}]);
+
