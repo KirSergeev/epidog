@@ -25,25 +25,6 @@ var singApp = angular.module('singApp', [
 //singApp;
 
 
-singApp.run(["$rootScope", "$location", function($rootScope, $location) {
-
-    $rootScope.$on("$routeChangeSuccess", function(userInfo) {
-        console.log('routeChangeSuccess' + userInfo);
-    });
-
-    $rootScope.$on("$routeChangeError", function(event, current, previous, eventObj) {
-        console.log('routeChangeError' + event);
-
-        //if (eventObj.authenticated === false) {
-        //    $location.path("/login");
-        //}
-    });
-}]);
-
-
-
-
-
 singApp.config(function($stateProvider, $urlRouterProvider){
 
     // For any unmatched url, send to /dashboard
@@ -89,6 +70,10 @@ singApp.config(function($stateProvider, $urlRouterProvider){
         .state('error', {
             url: '/error',
             templateUrl: 'views/error.html'
+        })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'views/register.html'
         })
 });
 
