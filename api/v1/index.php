@@ -1,5 +1,5 @@
 <?php
-require '.././libs/Slim/Slim.php';
+require '../libs/Slim/Slim.php';
 require_once 'dbHelper.php';
 
 \Slim\Slim::registerAutoloader();

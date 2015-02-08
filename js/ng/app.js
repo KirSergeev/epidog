@@ -117,7 +117,8 @@ singApp.value('uiJqDependencies', {
         'vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js'
     ],
     'parsley': [
-        'vendor/parsleyjs/dist/parsley.min.js'
+        'vendor/parsleyjs/dist/parsley.min.js',
+        'vendor/parsleyjs/src/i18n/ru.js'
     ],
     'sortable': [
         'vendor/jquery-ui/ui/core.js',

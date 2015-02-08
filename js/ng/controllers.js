@@ -326,3 +326,31 @@ appControllers.controller('UserCtrl', function ($scope, $http, $window, $locatio
     };
 
 });
+
+appControllers.controller('RegisterCtrl', function ($scope, $http, $window, $location, $timeout, $log, auth) {
+
+    $scope.form2 = false;
+    $scope.form1 = !$scope.form2;
+
+
+
+    $scope.regForm = {};
+    $scope.reg = {
+        country: 'Russian Federation'
+    };
+
+    // Login user
+    $scope.regForm.submit = function ( oForm, reg ) {
+        console.log($scope.regForm);
+
+        var responsePromise = $http.post("http://epidog.net/server/?register", reg, {});
+        responsePromise.success(function(dataFromServer, status, headers, config) {
+            console.log(dataFromServer.title);
+        });
+        responsePromise.error(function(data, status, headers, config) {
+            alert("Submitting form failed!");
+        });
+
+    }
+
+});
