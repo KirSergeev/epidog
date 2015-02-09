@@ -342,6 +342,10 @@ appControllers.controller('RegisterCtrl', function ($scope, $http, $window, $loc
         password:   '123456'
     };
 
+    $scope.send = function (reg) {
+        alert('Send valid form');
+    };
+
     $scope.regForm.submit = function ( oForm, reg ) {
 
         Data.post('members/', reg ).then(function (result) {

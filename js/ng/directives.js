@@ -26,6 +26,33 @@ appDirectives.directive('body', function() {
     }
 });
 
+
+/*
+*   parsley JS  - smapt rirective from Denis Kozlov
+*/
+
+appDirectives.directive('formValidate', function () {
+    return {
+        restrict: 'A',
+        scope: {
+            sendForm: '&'
+        },
+        link: function (scope, element, attrs) {
+
+            $(element)
+                .parsley()
+                .subscribe('parsley:form:success', function () {
+                    scope.sendForm();
+                });
+
+            element.on('$destroy', function () {
+                $(element).parsley().destroy();
+            });
+        }
+    }
+});
+
+
 /* ========================================================================
  * Animate Progress Bars
  * ========================================================================

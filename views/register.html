@@ -9,15 +9,23 @@
                     <!--
                     data-ui-jq="parsley"
                     data-parsley-priority-enabled="false"
+                    ng-submit="regForm.submit(this, reg)"
                     -->
 
                     <div class="widget-body">
-                        <form name="regFormNg"
-                              role="form"
-                              ng-submit="regForm.submit(this, reg)"
+
+                        <form form-validate send-form="send()">
+                            {{ title }}<br/>
+                            <input type="text" required/>
+                            <button type="submit">Submit</button>
+                        </form>
+
+
+
+
+                    <form form-validate
+                              send-form="send()"
                               novalidate="novalidate"
-                              data-ui-jq="parsley"
-                              data-parsley-priority-enabled="false"
                               >
                             <fieldset>
                                 <div class="row">
@@ -309,39 +317,12 @@
                                     </div>
                                 </div>
                                 <div class="btn-toolbar pull-right">
-                                    <button type="button" class="btn btn-default btn-rounded">Chk</button>
                                     <button type="button" data-ui-sref="login" class="btn btn-default btn-rounded">Login</button>
                                     <button type="submit" class="btn btn-danger btn-rounded pull-right">Submit</button>
                                 </div>
                             </fieldset>
                         </form>
                     </div>
-
-
-                    <!--<div class="widget-body">-->
-                        <!--<form class="login-form mt-lg" ng-submit="login(credentials)">-->
-                            <!--<div class="form-group">-->
-                                <!--<input type="text" class="form-control" id="username" placeholder="Username"-->
-                                       <!--ng-model="credentials.username">-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                                <!--<input class="form-control" id="password" type="text" placeholder="Password"-->
-                                       <!--ng-model="credentials.password">-->
-                            <!--</div>-->
-                            <!--<div class="clearfix">-->
-                                <!--<div class="btn-toolbar pull-right">-->
-
-                                    <!--<button type="button" data-ui-sref="login"      class="btn btn-default btn-sm">Back to Login</button>-->
-                                    <!--<button type="button" data-ui-sref="register()" class="btn btn-inverse btn-sm">Register</button>-->
-
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</form>-->
-                    <!--</div>-->
-
-
-
-
                 </section>
             </div>
         </div>
