@@ -343,7 +343,7 @@ appControllers.controller('RegisterCtrl', function ($scope, $http, $window, $loc
     };
 
     $scope.send = function (reg) {
-        alert('Send valid form');
+        console.log(reg);
     };
 
     $scope.regForm.submit = function ( oForm, reg ) {
