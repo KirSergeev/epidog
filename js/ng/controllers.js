@@ -327,28 +327,30 @@ appControllers.controller('UserCtrl', function ($scope, $http, $window, $locatio
 
 });
 
-appControllers.controller('RegisterCtrl', function ($scope, $http, $window, $location, $timeout, $log, auth) {
+appControllers.controller('RegisterCtrl', function ($scope, $http, $window, $location, $timeout, $log, Data) {
 
     $scope.form2 = false;
     $scope.form1 = !$scope.form2;
 
-
+    $scope.member = {};
 
     $scope.regForm = {};
     $scope.reg = {
-        country: 'Russian Federation'
+        username:   'Kirill Sergeev',
+        country:    'Russian Federation',
+        email:      'kir.sergeev@gmail.com',
+        password:   '123456'
     };
 
-    // Login user
     $scope.regForm.submit = function ( oForm, reg ) {
-        console.log($scope.regForm);
 
-        var responsePromise = $http.post("http://epidog.net/server/?register", reg, {});
-        responsePromise.success(function(dataFromServer, status, headers, config) {
-            console.log(dataFromServer.title);
-        });
-        responsePromise.error(function(data, status, headers, config) {
-            alert("Submitting form failed!");
+        Data.post('members/', reg ).then(function (result) {
+            if(result.status != 'error') {
+                alert('OK!');
+            }else{
+                alert('Error!');
+            }
+            console.log(result);
         });
 
     }
